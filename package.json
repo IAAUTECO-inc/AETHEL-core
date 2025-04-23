@@ -24,6 +24,9 @@
   "volta": {
     "node": "22.13.1"
   },
+  "pnpm": {
+    "neverBuiltDependencies": []
+  },
   "scripts": {
     "pre-commit": "lint-staged",
     "lint": "tsx scripts/lint.js",
