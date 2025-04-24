@@ -39,8 +39,8 @@ export class FileHelper {
     )
     const downloader = await ipullDownloadFile({
       url: fileURL,
-      directory: directory,
-      fileName: fileName,
+      directory,
+      fileName,
       ...options
     })
 
