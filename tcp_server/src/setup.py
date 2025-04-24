@@ -27,6 +27,14 @@ Instead of injecting everything from a package,
 it's recommended to only include the necessary files via the
 "include_files" property.
 """
+
+package_dir = os.path.join('tcp_server', 'src', '.venv', 'lib', f'python{PYTHON_VERSION}', 'site-packages')
+if 'win' in sysconfig.get_platform():
+    package_dir = os.path.join('tcp_server', 'src', '.venv', 'Lib', 'site-packages')
+
+av_src = os.path.join(package_dir, 'av')
+av_dist = os.path.join('lib', 'av')
+
 options = {
     'build_exe': {
         'packages': [
@@ -43,7 +51,7 @@ options = {
         'include_files': [
             # Includes "av" module files manually to avoid ModuleNotFoundError
             # for "av.about" since cx_Freeze does not include about.py somehow
-            (f'tcp_server/src/.venv/lib/python{PYTHON_VERSION}/site-packages/av', 'lib/av')
+            (av_src, av_dist)
         ]
     }
 }
