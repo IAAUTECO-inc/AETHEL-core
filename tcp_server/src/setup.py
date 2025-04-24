@@ -35,6 +35,9 @@ if 'win' in sysconfig.get_platform():
 av_src = os.path.join(package_dir, 'av')
 av_dist = os.path.join('lib', 'av')
 
+nvidia_cudnn_lib_src = os.path.join(package_dir, 'nvidia', 'cudnn', 'lib')
+nvidia_cudnn_lib_dist = os.path.join('lib', 'nvidia', 'cudnn', 'lib')
+
 options = {
     'build_exe': {
         'packages': [
@@ -58,10 +61,13 @@ options = {
 
 # Include NVIDIA libraries for non-macOS platforms
 if 'macos' not in sysconfig.get_platform():
-    options['build_exe']['include_files'] = [
-        *options['build_exe']['include_files'],
-        (f'tcp_server/src/.venv/lib/python{PYTHON_VERSION}/site-packages/nvidia/cudnn/lib', 'lib/nvidia/cudnn/lib')
-    ]
+    if not os.path.exists(nvidia_cudnn_lib_src):
+        print(f'Skipping NVIDIA cuDNN inclusion. Directory does not exist: {nvidia_cudnn_lib_src}')
+    else:
+        options['build_exe']['include_files'] = [
+            *options['build_exe']['include_files'],
+            (nvidia_cudnn_lib_src, nvidia_cudnn_lib_dist)
+        ]
 
 # Include private libraries from the tokenizers package for Linux
 # if 'linux' in sysconfig.get_platform():
