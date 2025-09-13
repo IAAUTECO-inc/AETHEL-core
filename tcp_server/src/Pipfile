@@ -21,7 +21,7 @@ geonamescache = "==2.0.0"
 # PyTorch is installed via the setup script
 # torch = "*"
 # TTS
-transformers = "==4.27.4"
+transformers = "==4.53.0"
 g2p-en = "==2.1.0"
 gruut = {version = "==2.2.3", extras = ["de", "es", "fr"]}
 inflect = "==7.0.0"
